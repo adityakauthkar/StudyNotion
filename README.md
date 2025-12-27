@@ -165,7 +165,7 @@ StudyNotion is a fully functional ed-tech platform that enables users to create,
 ## Resources
 
 - **Frontend**: 
-- **GitHub Repository**: [GitHub Link](https://github.com/khalekarakash05/StudyNotion)
+- **GitHub Repository**: [GitHub Link](https://github.com/adityakauthkar/StudyNotion)
 
 ## Topics
 
@@ -183,6 +183,6 @@ StudyNotion is a fully functional ed-tech platform that enables users to create,
 
 ## Contact
 
-For more information, please contact us at [akashkhalekar@gmail.com].
+For more information, please contact us at [adityakauthkar@gmail.com].
 
 
