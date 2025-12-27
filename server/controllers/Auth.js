@@ -40,6 +40,7 @@ exports.sendOTP = async(req, res) =>{
 
     //if not exists then genetate otp
     var otp =  otpGenerator.generate(6,{
+
         upperCaseAlphabets: false,
         lowerCaseAlphabets: false,
         specialChars: false,
@@ -116,18 +117,17 @@ exports.signUp = async(req, res) =>{
             message:"Password and Confirm password value does not match, please try again"
         })
     }
-    //check user already exists or not
+
     const existingUser = await User.findOne({email});
     console.log("existingUser", existingUser)
     if(existingUser){
-        //user already exists hai
+
         return res.status(401).json({
             success: false,
             message: "User already registered",
         })
     }
     //find most recent OTP stored for that user
-    // const recentOTP = await Otp.find({ email: email }).sort({ createdAt: -1 }).limit(1);
     const recentOTP = await Otp.find({email}).sort({createdAt: -1}).limit(1);
     console.log("recentOTP", recentOTP);
 
@@ -150,12 +150,10 @@ exports.signUp = async(req, res) =>{
     }
 
     console.log("userotp", otp)
-    //hash karlo password ko
 
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log("hashedPassword", hashedPassword)
 
-    //db me entry create karlo
 
     const profileDetails = await Profile.create({
         gender: null,

@@ -11,7 +11,7 @@ import { apiConnector } from '../../services/apiconnector';
 import { categories } from '../../services/apis';
 import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineMenu } from "react-icons/ai";
-
+    
 const Navbar = () => {
 
     const {token} = useSelector((state)=> state.auth);

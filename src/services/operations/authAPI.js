@@ -15,7 +15,7 @@ const {
   LOGIN_API,
   RESETPASSTOKEN_API,
   RESETPASSWORD_API,
-} = endpoints
+} = endpoints 
 
 export function sendOtp(email, navigate) {
   return async (dispatch) => {

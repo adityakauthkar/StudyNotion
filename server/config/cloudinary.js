@@ -14,4 +14,4 @@ const cloudinaryConnect =  () => {
     }
 }
 
-module.exports = cloudinaryConnect;
+module.exports = cloudinaryConnect; 
