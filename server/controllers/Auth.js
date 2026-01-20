@@ -28,7 +28,7 @@ exports.sendOTP = async(req, res) =>{
     }
 
     //then validate is Email already exists
-    const checkUserExists = await User.findOne({Email})
+    const checkUserExists = await User.findOne({Email}) ;
     console.log("checkuserexists", checkUserExists)
     //if exists then return a response
     if(checkUserExists){
@@ -124,7 +124,7 @@ exports.signUp = async(req, res) =>{
 
         return res.status(401).json({
             success: false,
-            message: "User already registered",
+            message: "User already registered. Please Login",
         })
     }
     //find most recent OTP stored for that user

@@ -113,7 +113,6 @@ export function login(email, password, navigate) {
         console.log("userImage", userImage);
       dispatch(setUser({ ...response.data.user, image: userImage }))
       localStorage.setItem("token", JSON.stringify(response.data.token))
-      //yahi par galati ki hai let's resolve it
       localStorage.setItem("user", JSON.stringify({ ...response.data.user, image: userImage }))
       navigate("/dashboard/my-profile")
     } catch (error) {

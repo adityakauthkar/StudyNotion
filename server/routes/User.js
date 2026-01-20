@@ -14,11 +14,6 @@ const {resetPassword, resetPasswordToken} = require("../controllers/ResetPasswor
 const {auth} = require("../middlewares/auth");
 
 
-//Routes for login sign up and authentication 
-
-//***************************************************************************** */
-//                           Authentication Routes
-//***************************************************************************** */
 
 //Route for user login
 router.post("/login", login);

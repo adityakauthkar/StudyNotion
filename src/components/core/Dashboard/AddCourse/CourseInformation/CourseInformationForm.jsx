@@ -43,7 +43,7 @@ const CourseInformationForm = () => {
   const [courseCategories, setCourseCategories] = useState([]);
 
   useEffect(()=>{
-        console.log("inside useeffect")
+        // console.log("inside useeffect")
 
           const getCategories = async() => {
                     setLoading(true);

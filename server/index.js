@@ -22,7 +22,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 5000;
 
 //database connect
-database.connect();
+database.connect(); 
 
 //middleware
 app.use(express.json());
