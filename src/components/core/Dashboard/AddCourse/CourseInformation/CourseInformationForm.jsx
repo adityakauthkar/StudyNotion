@@ -97,103 +97,80 @@ const CourseInformationForm = () => {
     }
 
 
-  const onsubmit = async(data) => {
-    console.log("data", data)
-    console.log("course", course)
-    if(editCourse){
-      // console.log("here")
-       if(isFormUpdated()){
-          const currentValues = getValues();
-          console.log("currentValues", currentValues)
-          const formData = new FormData();
+  const onsubmit = async (data) => {
+  console.log("Form data", data);
+  setLoading(true);
 
-          formData.append('courseId',course._id);
-            if(currentValues.courseTitle !== course.name){
-              formData.append('courseTitle', JSON.stringify(data.courseTitle));
-            }
-
-            if(currentValues.courseShortDesc !== course.description){
-              formData.append('courseShortDesc', JSON.stringify(data.courseShortDesc));
-            }
-
-            if(currentValues.coursePrice !== course.price){
-              formData.append('coursePrice', JSON.stringify(data.coursePrice));
-            }
-
-            if(currentValues.courseTags !== course.tags){
-              formData.append('courseTags', JSON.stringify(data.courseTags));
-            }
-
-            if(currentValues.courseBenifits !== course.whatWillYouLearn){
-              formData.append('courseBenifits', JSON.stringify(data.courseBenifits));
-            }
-
-            if(currentValues.courseCategory._id !== course.category._id){
-              formData.append('courseCategory', JSON.stringify(data.courseCategory));
-            }
-            console.log("courseCategoryunder", formData)
-            if(currentValues.courseThumbnail !== course.thumbnail){
-              formData.append('thumbnailImage', JSON.stringify(data.thumbnailImage));
-            }
-
-            if(currentValues.courseRequirements.toString() !== course.instructions.toString()){
-              formData.append('courseRequirements', JSON.stringify(data.courseRequirements));
-            }
-
-            // console.log("formData", formData);
-            // dispatch(updateCourse(formData));
-            setLoading(true);
-            const response = await editCourseDetails(formData, token);
-            setLoading(false);
-            if(response){
-              
-              dispatch(setCourse(response));
-              dispatch(setStep(2));
-            }
-        }
-      else{
-        toast.error("No changes made to the form")
-      }
-        // console.log("Printing Form Data", formData);
-        // console.log("Printing result", response);
-      return;
-      
-    }
-
-    //create a new Course
-    console.log("data at this line 162", data.courseTags)
+  try {
     const formData = new FormData();
-    formData.append('courseName', data.courseTitle);
-    formData.append('courseDescription', data.courseShortDesc);
-    formData.append('price', data.coursePrice);
-    formData.append('Category', data.courseCategory);
-    formData.append('whatWillYouLearn', data.courseBenefits);
-    formData.append('instructions', data.courseRequirements);
-    formData.append('thumbnailImage', data.thumbnailImage);
-    // formData.append('tags', JSON.stringify(data.courseTags));
-    formData.append('tags', JSON.stringify(data.courseTags.map(tag => tag.value)));
-    console.log("tag of form",)
-    formData.append('status', COURSE_STATUS.DRAFT);
-    console.log("formData", formData);
 
-    setLoading(true);
-    const result = await addCourseDetails(formData, token);
-    console.log("result", result)
-      if(result){
-        console.log("resultinside");
-        
-        
-        
+    if(editCourse) {
+      // Edit mode: only send changed fields
+      formData.append("courseId", course._id);
+
+      if(data.courseTitle !== course.courseName) {
+        formData.append("courseName", data.courseTitle);
+      }
+      if(data.courseShortDesc !== course.courseDescription) {
+        formData.append("courseDescription", data.courseShortDesc);
+      }
+      if(data.coursePrice !== course.price) {
+        formData.append("price", data.coursePrice);
+      }
+      if(JSON.stringify(data.courseTags.map(tag => tag.value)) !== JSON.stringify(course.tags)) {
+        formData.append("tags", JSON.stringify(data.courseTags.map(tag => tag.value)));
+      }
+      if(data.courseBenefits !== course.whatWillYouLearn) {
+        formData.append("whatWillYouLearn", data.courseBenefits);
+      }
+      if(data.courseCategory !== course.category._id) {
+        formData.append("Category", data.courseCategory);
+      }
+      if(data.thumbnailImage && data.thumbnailImage !== course.thumbnail) {
+        formData.append("thumbnailImage", data.thumbnailImage); // File object
+      }
+      if(JSON.stringify(data.courseRequirements) !== JSON.stringify(course.instructions)) {
+        formData.append("instructions", JSON.stringify(data.courseRequirements));
+      }
+
+      // If no fields changed
+      if(formData.entries().next().done) {
+        toast.error("No changes made to the form");
+        setLoading(false);
+        return;
+      }
+
+      const response = await editCourseDetails(formData, token);
+      if(response) {
+        dispatch(setCourse(response));
+        dispatch(setStep(2));
+      }
+    } else {
+      // Create mode: send all fields
+      formData.append("courseName", data.courseTitle);
+      formData.append("courseDescription", data.courseShortDesc);
+      formData.append("price", data.coursePrice);
+      formData.append("Category", data.courseCategory);
+      formData.append("whatWillYouLearn", data.courseBenefits);
+      formData.append("instructions", JSON.stringify(data.courseRequirements));
+      formData.append("thumbnailImage", data.thumbnailImage); // File object
+      formData.append("tags", JSON.stringify(data.courseTags.map(tag => tag.value)));
+      formData.append("status", COURSE_STATUS.DRAFT);
+
+      const result = await addCourseDetails(formData, token);
+      if(result) {
         dispatch(setCourse(result));
         dispatch(setStep(2));
-        console.log("setStep(2)",setStep(2))
-        console.log("inside result stpe is ",step)
       }
-
-      setLoading(false);
-      console.log("Printing Form Data", formData);
-      console.log("Printing result", result);
+    }
+  } catch (error) {
+    console.log("Form submit error", error);
+    toast.error("Something went wrong. Please try again.");
+  } finally {
+    setLoading(false);
   }
+};
+
 
   return (
     <form

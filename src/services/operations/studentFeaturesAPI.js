@@ -36,9 +36,13 @@ function loadScript(src) {
 }
 
 export async function buyCourse(token, courses, userDetails, navigate, dispatch){
+console.log("Token before payment API call:", token);
+
     const toastId = toast.loading("Loading...")
     try {
         //load the script
+        console.log("Token:", token);
+
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
 
         if(!res){
@@ -51,10 +55,11 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         const orderResponse = await apiConnector("POST", COURSE_PAYMENT_API, 
                                             {courses}, 
                                             {
-                                                authorisation: `Bearer ${token}`,
+                                                 Authorization: `Bearer ${token}`
                                             }
         )
-        console.log("ORDER RESPONSE", orderResponse);
+       
+
         if(!orderResponse.data.success){
             throw new Error(orderResponse.data.message);
         }
@@ -110,8 +115,8 @@ async function sendPaymentSuccessfulEmail(response, amount, token){
                                 amount
                             },
                             {
-                                "Content-Type": "multipart/form-data",
-                                 authorisation: `Bearer ${token}`,
+                              
+                                 Authorization: `Bearer ${token}`
                             }
 
         )
@@ -144,8 +149,7 @@ async function verifyPayment(bodyData, token, dispatch, navigate){
         //  }, 
         bodyData,
          {
-            "Content-Type": "multipart/form-data",
-            authorisation: `Bearer ${token}`,
+           Authorization: `Bearer ${token}`
          })
          console.log("res", response);
          if(!response.data.success){

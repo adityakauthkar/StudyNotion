@@ -53,9 +53,7 @@ const {
 //importing middleware
 const {auth, isStudent, isAdmin, isInstructor} = require("../middlewares/auth");
 
-//********************************************************************* */
-//                          Course Routes
-//********************************************************************* */
+
 
 //route for creating course
 router.post("/createCourse", auth, isInstructor, createCourse);
@@ -99,9 +97,6 @@ router.delete("/deleteCourse", auth, isInstructor, deleteCourse)
 //route for getting full course details
 router.post("/getFullCourseDetails", auth, getFullCourseDetails);
 
-//********************************************************************* */
-//                         Rating and Review Routes
-//********************************************************************* */
 
 //route for creating rating and review
 router.post("/createrating", auth, isStudent, createRating);
@@ -115,9 +110,7 @@ router.get("/averagerating", averageRating);
 
 
 
-//******************************************************************** */
-//                          Categories Routes
-//******************************************************************** */
+
 
 
 //route for creating categories

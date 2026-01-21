@@ -22,8 +22,6 @@ router.post("/login", login);
 //route for user signup
 router.post("/signup", signUp);
 
-//route for sending otp
-router.post("/sendotp", sendOTP);
 
 //route for changing password
 router.post("/changepassword", auth, changePassword);
@@ -31,9 +29,6 @@ router.post("/changepassword", auth, changePassword);
 
 
 
-//************************************************************************ */
-//                          Reset Password Routes
-//************************************************************************ */
 
 //route for reset password
 router.post("/resetpassword", resetPassword);

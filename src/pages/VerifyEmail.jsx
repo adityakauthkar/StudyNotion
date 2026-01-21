@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import OtpInput from 'react-otp-input';
+
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { sendOtp } from '../services/operations/authAPI';
+
 import { signUp } from '../services/operations/authAPI';
 import {RxCountdownTimer} from 'react-icons/rx'
 import {BiArrowBack } from 'react-icons/bi'
@@ -13,7 +13,7 @@ const VerifyEmail = () => {
 //    const {signupData} = useSelector((state)=> state.auth.signupData);
     const {loading, signupData} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-   const [otp, setOtp] = useState('');
+ 
    const navigate = useNavigate();
 
    useEffect(() => {
@@ -37,7 +37,7 @@ const VerifyEmail = () => {
          } = signupData;
 
          dispatch(signUp(accountType, firstName, lastName, email, password,
-            confirmPassword, otp, navigate));
+            confirmPassword, navigate));
          
     }
 
@@ -55,22 +55,7 @@ const VerifyEmail = () => {
                         A verification code has been sent to you. Enter the code below
                     </p>
                     <form action="" onSubmit={onSubmitHandler}>
-                        <OtpInput
-                        value={otp}
-                        numInputs={6}
-                        renderSeparator={<span>-</span>}
-                        onChange={setOtp}
-                        renderInput={(props) => <input {...props} 
-                        style={{
-                            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-                          }}
-                          className="w-[48px] lg:w-[60px] border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-yellow-50"/>}
                         
-                          containerStyle={{
-                            justifyContent: "space-between",
-                            gap: "0 6px",
-                        }}
-                        />
                         
 
                         <button
@@ -93,7 +78,7 @@ const VerifyEmail = () => {
 
                         <button 
                         className="flex items-center text-blue-100 gap-x-2"
-                        onClick={() => dispatch(sendOtp(signupData.email, navigate))}>
+                     >
                              <RxCountdownTimer />
                             Resend it
                         </button>

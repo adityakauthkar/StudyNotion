@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose")
+require("dotenv").config();
 
 
 const userRouter = require("./routes/User");
@@ -16,7 +17,6 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const cloudinaryConnect = require("./config/cloudinary");
 const fileUpload = require("express-fileupload");
-require("dotenv").config();
 
 
 const PORT = process.env.PORT || 5000;
@@ -28,14 +28,7 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser());
 app.options('*', cors()); 
-// app.use(
-//     cors({
-//             origin: '*', 
-//             methods: ['*'], 
-//             allowedHeaders: ['Content-Type', 'Authorization'],
-//             credentials: true
-//     })
-// );
+
 
 app.use(cors());
 app.use(fileUpload({

@@ -4,7 +4,6 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { sendOtp } from "../../../services/operations/authAPI"
 // import { setSignupData } from "../../../slices/authSlice"
 import {setSignupData} from "../../../slices/authSlice"
 import { ACCOUNT_TYPE } from "../../../utils/constants"
@@ -48,20 +47,18 @@ function SignupForm() {
       toast.error("Passwords Do Not Match")
       return
     }
-    const otpData = { email };
+   
     const signupData = {
       ...formData,
       accountType,
       phoneNumber
     }
 
-    // Setting signup data to state
-    // To be used after otp verification
+    
     dispatch(setSignupData(signupData))
-    console.log("signupData", signupData)
-    console.log("otpData", otpData);
-    // Send OTP to user for verification
-    dispatch(sendOtp(otpData, navigate));
+   
+ 
+    
 
     // Reset
     setFormData({

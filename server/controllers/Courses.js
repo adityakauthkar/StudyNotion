@@ -12,16 +12,16 @@ require("dotenv").config();
 exports.createCourse = async(req, res) => {
     try {
         //fetch data 
-        console.log("req ki body", req.body);
-        const {courseName, courseDescription, whatWillYouLearn, price, tags, Category,instructions} = req.body;
+
+        const {courseName, courseDescription, whatWillYouLearn, price, tags , Category,instructions} = req.body;
 
         //get thumbnail Image
         const thumbnail = req.files.thumbnailImage;
- 
+       
         //validation
-        console.log("courseName", courseName, "courseDescription", courseDescription, "whatWillYouLearn", whatWillYouLearn, "price", price, "tag", tags, "Category", Category, "thumbnail", thumbnail);
-        if(!courseName || !courseDescription || !whatWillYouLearn || !price
-            || !tags  || !Category || !thumbnail || !instructions){
+        // console.log("courseName", courseName, "courseDescription", courseDescription, "whatWillYouLearn", whatWillYouLearn, "price", price, "tag", tags, "Category", Category, "thumbnail", thumbnail);
+        if(!courseName || !courseDescription || !whatWillYouLearn || !price || !tags
+              || !Category || !thumbnail || !instructions){
                 return res.status(401).json({
                     success: false,
                     message: "Fill all the details carefully",
@@ -30,9 +30,9 @@ exports.createCourse = async(req, res) => {
         }
         //check for is it instructor
         const userId = req.user.id;
-        console.log("object", userId);
+        // console.log("object", userId);
         const instructorDetails = await User.findById(userId);
-        console.log("instructor details", instructorDetails);
+        // console.log("instructor details", instructorDetails);
         //TODO : check that userId and instructordetails id same or different
 
         if(!instructorDetails){
@@ -44,7 +44,7 @@ exports.createCourse = async(req, res) => {
 
         //check given tag is valid or not
         console.log("tag", tags);
-        console.log("Category", Category);
+        // console.log("Category", Category);
 
         const tagDetails = await Categorys.findById(Category);
         if(!tagDetails){
@@ -53,7 +53,7 @@ exports.createCourse = async(req, res) => {
                 message: "Tag details are Incorrect",
             })
         }
-        console.log("tagDetails", tagDetails);
+        // console.log("tagDetails", tagDetails);
         //upload image to cloudinary
         
         const thumbnailImage = await uploadImageToCloudinary(thumbnail, process.env.FOLDER_NAME)
@@ -65,7 +65,7 @@ exports.createCourse = async(req, res) => {
             instructor: instructorDetails._id,
             whatWillYouLearn: whatWillYouLearn,
             price,
-            tags: tags,
+          
             category: tagDetails._id,
             thumbnail: thumbnailImage.secure_url,
             instructions: instructions
@@ -192,9 +192,9 @@ exports.editCourse = async(req, res) => {
     try {
         const {courseId} = req.body;
         const updates = req.body;
-        console.log("courseId", courseId, "updates", updates);
-        const course = await Course.findById(courseId);
-        console.log("course", course)
+        // console.log("courseId", courseId, "updates", updates);
+        // const course = await Course.findById(courseId);
+        // console.log("course", course)
         if(!course){
             return res.status(404).json({
                 success: false,
@@ -219,9 +219,9 @@ exports.editCourse = async(req, res) => {
                 }
             }
         }
-        console.log("before save");
+        // console.log("before save");
         await course.save();
-        console.log("after save")
+        // console.log("after save")
         const _id = updates.courseId
         const updatedCourse = await Course.findById({
             _id
@@ -317,8 +317,8 @@ exports.getFullCourseDetails = async (req, res) => {
     try {
       const { courseId } = req.body
       const userId = req.user.id
-      console.log("courseId", courseId)
-      console.log("userId", userId)
+    //   console.log("courseId", courseId)
+    //   console.log("userId", userId)
       const courseDetails = await Course.findOne({
         _id: courseId,
       })
@@ -337,14 +337,14 @@ exports.getFullCourseDetails = async (req, res) => {
           },
         })
         .exec()
-        console.log("courseDetails : ", courseDetails)
+        // console.log("courseDetails : ", courseDetails)
   
       let courseProgressCount = await CourseProgress.findOne({
         courseID: courseId,
         userID: userId,
       })
       if(courseProgressCount){
-        console.log("courseProgressCount : ", courseProgressCount)
+        // console.log("courseProgressCount : ", courseProgressCount)
   
       console.log("courseProgressCount : ", courseProgressCount.completedVideos.length)
       }
@@ -366,12 +366,12 @@ exports.getFullCourseDetails = async (req, res) => {
       let totalDurationInSeconds = 0
       // console.log("coursedeatils : ", courseDetails)
       courseDetails.courseContent.forEach((content) => {
-        console.log("content : ", content)
+        // console.log("content : ", content)
         content.subSection.forEach((subSection) => {
-          console.log("subSection : ", subSection)
+        //   console.log("subSection : ", subSection)
           const timeDurationInSeconds = parseInt(subSection.timeDuration)
           totalDurationInSeconds += timeDurationInSeconds
-          console.log("timeduration", totalDurationInSeconds);
+        //   console.log("timeduration", totalDurationInSeconds);
         })
       })
       // console.log("here i", totalDurationInSeconds)

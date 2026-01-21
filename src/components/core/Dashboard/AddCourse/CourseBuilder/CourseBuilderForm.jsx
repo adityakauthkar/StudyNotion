@@ -25,7 +25,6 @@ const CourseBuilderForm = () => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async(data) => {
-      console.log("inside onsubmit")
       setLoading(true);
       let result;
       console.log("data", data.sectionName);
@@ -33,7 +32,6 @@ const CourseBuilderForm = () => {
 
 
       if(editSectionName){
-        console.log("updatesection","iska dat", data , "editsectionname", editSectionName, "courseid", course._id, "token", token)
 
         //we are editing the section name
         result = await updateSection({
@@ -45,7 +43,6 @@ const CourseBuilderForm = () => {
 
       }
       else{
-        console.log("createsection", "iske datas", data.sectionName, course._id)
         
         result = await createSection({
           sectionName: data.sectionName,
