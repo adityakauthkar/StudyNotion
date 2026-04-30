@@ -9,7 +9,7 @@ import { logout } from './authAPI';
 const {GET_USER_DETAILS_API, GET_USER_ENROLLED_COURSES_API, GET_INSTRUCTOR_DATA_API} = profileEndPoints;
 
 
-export function getUserDetails(token, navigate) {
+export function getUserDetails(token, navigate) { 
     return async (dispatch) => {
       const toastId = toast.loading("Loading...")
       console.log("token",token)
@@ -42,14 +42,14 @@ export function getUserDetails(token, navigate) {
     let result = []
     try {
       console.log("BEFORE Calling BACKEND API FOR ENROLLED COURSES");
-      //lets take token from cookie
+      
       
       const response = await apiConnector(
         "GET",
         GET_USER_ENROLLED_COURSES_API,
         null,
         {
-          authorisation: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         }
       )
       console.log("AFTER Calling BACKEND API FOR ENROLLED COURSES");
@@ -75,7 +75,7 @@ export async function getInstructorData(token){
   let result = []
   try {
       const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, {
-          authorisation: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
       })
 
       console.log("GET_INSTRUCTOR_API_RESPONSE............", response)

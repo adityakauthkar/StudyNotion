@@ -48,10 +48,9 @@ export const fetchCourseDetails = async (courseId, token) => {
   try {
     const response = await apiConnector("POST", COURSE_DETAILS_API, {
       courseId,
-
     },{
       "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`, 
     })
     console.log("COURSE_DETAILS_API API RESPONSE............", response)
 

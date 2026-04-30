@@ -5,12 +5,13 @@ import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconnector"
 import { endpoints } from "../apis"
 
+
 const {
   SIGNUP_API,
   LOGIN_API,
   RESETPASSTOKEN_API,
   RESETPASSWORD_API,
-} = endpoints
+} = endpoints 
 
 // ================== SIGNUP ==================
 export function signUp(
@@ -59,7 +60,7 @@ export function signUp(
 
 // ================== LOGIN ==================
 export function login(email, password, navigate) {
-  return async (dispatch) => {
+  return async (dispatch) => { 
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
 
@@ -84,7 +85,7 @@ export function login(email, password, navigate) {
             user.firstName
           )}+${encodeURIComponent(user.lastName)}`
 
-      dispatch(setToken(token))
+      dispatch(setToken(token)) 
       dispatch(setUser({ ...user, image: userImage }))
 
       localStorage.setItem("token", JSON.stringify(token))

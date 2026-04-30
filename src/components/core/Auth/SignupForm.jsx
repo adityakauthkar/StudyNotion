@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import {setSignupData} from "../../../slices/authSlice"
 import { ACCOUNT_TYPE } from "../../../utils/constants"
 import Tab from "../../common/Tab"
+import { useSelector } from "react-redux"
 
 function SignupForm() {
   const navigate = useNavigate()
@@ -44,7 +45,7 @@ function SignupForm() {
     e.preventDefault()
 
     if (password !== confirmPassword) {
-      toast.error("Passwords Do Not Match")
+      toast.error("Passwords Doest Not Match")
       return
     }
    
@@ -52,7 +53,7 @@ function SignupForm() {
       ...formData,
       accountType,
       phoneNumber
-    }
+    } 
 
     
     dispatch(setSignupData(signupData))
@@ -67,13 +68,15 @@ function SignupForm() {
       email: "",
       password: "",
       confirmPassword: "",
-      // phoneNumber
+      phoneNumber:""
     })
     setAccountType(ACCOUNT_TYPE.STUDENT)
+
+    navigate('/verify-email');
   }
 
-  // const signupData = useSelector((state) => state.auth)
-  //   console.log("data", signupData);
+  const signupData = useSelector((state) => state.auth)
+    console.log("data", signupData);
 
   // data to pass to Tab component
   const tabData = [

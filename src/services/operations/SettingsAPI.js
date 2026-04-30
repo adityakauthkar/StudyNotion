@@ -56,7 +56,8 @@ export function updateProfile(token, formData) {
     try {
       console.log("form ka data",formData)
       const response = await apiConnector("PUT", UPDATE_PROFILE_API, formData, {
-        authorisation: `Bearer ${token}`,
+       Authorization: `Bearer ${token}`,
+
       })
       console.log("UPDATE_PROFILE_API API RESPONSE............", response)
 
@@ -110,7 +111,7 @@ export function deleteProfile(token, navigate) {
     const toastId = toast.loading("Loading...")
     try {
       const response = await apiConnector("DELETE", DELETE_PROFILE_API, null, {
-        authorisation: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       })
       console.log("DELETE_PROFILE_API API RESPONSE............", response)
 

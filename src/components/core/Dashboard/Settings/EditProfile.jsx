@@ -23,8 +23,8 @@ export default function EditProfile() {
     console.log("Form Data - ", data)
     try {
       const datta = await dispatch(updateProfile(token, data))
-      console.log("this data", datta);
-      console.log("user", user);
+      // console.log("this data", datta);
+      // console.log("user", user);
       // if (datta) {
       //   localStorage.setItem("user", JSON.stringify(datta));
       // }

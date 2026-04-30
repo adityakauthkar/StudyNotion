@@ -33,11 +33,11 @@ const VerifyEmail = () => {
             email,
             password,
             confirmPassword,
-            
+            phoneNumber,
          } = signupData;
 
          dispatch(signUp(accountType, firstName, lastName, email, password,
-            confirmPassword, navigate));
+            confirmPassword,phoneNumber ,  navigate));
          
     }
 
