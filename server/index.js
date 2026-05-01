@@ -31,7 +31,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://study-notion-hazel-six.vercel.app/", 
+    origin: "https://study-notion-hazel-six.vercel.app", 
     credentials: true,
   })
 );
