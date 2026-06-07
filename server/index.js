@@ -28,10 +28,16 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser());
 
+// Allowed origins : 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://study-notion-hazel-six.vercel.app",
+];
+
 
 app.use(
   cors({
-    origin: "https://study-notion-hazel-six.vercel.app", 
+    origin: allowedOrigins, 
     credentials: true,
   })
 );

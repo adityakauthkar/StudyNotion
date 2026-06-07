@@ -148,7 +148,7 @@ exports.login = async(req, res) => {
 exports.changePassword = async(req, res) =>{
     try {
     const {oldPassword, newPassword, confirmPassword} = req.body;
-    console.log("req.body", req.body);
+    // console.log("req.body", req.body);
 
     
     if(!oldPassword || !newPassword || !confirmPassword){
@@ -167,11 +167,11 @@ exports.changePassword = async(req, res) =>{
         })
     }
     const users = await User.findById(user?.id);
-    console.log("users", users);
+    // console.log("users", users);
     
 
     const result = await bcrypt.compare(oldPassword, users.password);
-    console.log("result", result);
+    // console.log("result", result);
     if(!result){
         return res.status(401).json({
             success: false,
@@ -179,7 +179,7 @@ exports.changePassword = async(req, res) =>{
         })
     }
     //if password match then
-    console.log("here", result, "password", newPassword, confirmPassword);
+    // console.log("here", result, "password", newPassword, confirmPassword);
     if(newPassword != confirmPassword){
         return res.status(400).json({
             success: false,
@@ -192,14 +192,14 @@ exports.changePassword = async(req, res) =>{
     users.password = hashedPassword;
     users.save();
     const updated = await User.findById(user.id);
-    console.log("updated pass",updated )
+    // console.log("updated pass",updated )
    
     const mailResponse = await mailSender(
         user?.email,
         `Password Changed Successfully`,
         passwordUpdated(user?.email, users?.firstName)
     )
-    console.log("mailresponse", mailResponse)
+    // console.log("mailresponse", mailResponse)
     //return response
     return res.status(200).json({
         success: true,

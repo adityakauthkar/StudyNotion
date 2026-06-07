@@ -79,7 +79,7 @@ console.log("Token before payment API call:", token);
                 email: userDetails.email
             },
             handler: function(response){
-                //send successfull wala mail
+                //send successfull  email
                 sendPaymentSuccessfulEmail(response, orderResponse.data.data.amount, token)
                 //verify payment
                 verifyPayment({...response, courses}, token, dispatch, navigate);

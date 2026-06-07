@@ -12,7 +12,9 @@ import InstructorSection from '../components/core/HomePage/InstructorSection';
 import Footer from '../components/common/Footer';
 import ExploreMore from '../components/core/HomePage/ExploreMore';
 import ReviewSlider from '../components/common/ReviewSlider';
-
+import { motion } from "framer-motion";
+import programming from '../assets/Images/Programming.json';
+import Lottie from "lottie-react";;
 
 
 const Home = () => {
@@ -27,8 +29,8 @@ const Home = () => {
             transition-all duration-200 hover:scale-95 w-fit'>
                 <div className='flex flex-row items-center gap-2 rounded-full px-10 py-[5px]
                 transition-all duration-200 group-hover:bg-richblack-900'>
-                    <p>Become an Instructor</p>
-                    <FaArrowRight />
+                   
+                 
                     </div>
                 </div>
             </Link>
@@ -54,15 +56,12 @@ const Home = () => {
                 </CTAButton>
             </div>
 
-            <div className='mx-3 my-12 shadow-blue-200'>
-                <video
-                muted
-                loop
-                autoPlay
-                >
-                    <source src={Banner} type="video/mp4" />
-                </video>
+            {/* animated video  */}
+            <div>
+                <Lottie animationData={programming} className="w-96"/> 
             </div>
+
+            
 
             {/* code section 1 */}
             
@@ -153,7 +152,7 @@ const Home = () => {
         </div>
 
         {/* section 2 */}
-        <div className='bg-pure-greys-5 text-richblack-700 '>
+        {/* <div className='bg-pure-greys-5 text-richblack-700 '>
             <div className='homepage_bg h-[310px] '>
                 <div className='w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-5 mx-auto'>
                     <div className='h-[150px]'></div>
@@ -210,7 +209,7 @@ const Home = () => {
 
             
 
-        </div>
+        </div>  */}
 
         {/* section 3 */}
         <div className='w-11/12 mx-auto max-w-maxContent flex flex-col items-center justify-between

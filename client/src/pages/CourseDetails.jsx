@@ -89,7 +89,7 @@ const CourseDetails = () => {
             buyCourse(token, [courseId], user, navigate, dispatch);
             return;
         }
-
+    
         //otherwise logged in nahi ho
         setConfirmationModal({
             text1: "you are not Logged in",
@@ -114,6 +114,7 @@ const CourseDetails = () => {
             <Error></Error>
         )
     }
+    
     
     const {
         _id: course_id,

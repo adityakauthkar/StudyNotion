@@ -128,7 +128,7 @@ exports.verifyPayment = async(req, res) => {
     console.log("first course", courses);
     const userId = req.user.id;
 
-    console.log("razorpay_order_id", razorpay_order_id, "razorpay_payment_id", razorpay_payment_id, "razorPay_signature", razorpay_signature, "courses", courses, "userid", userId)
+    // console.log("razorpay_order_id", razorpay_order_id, "razorpay_payment_id", razorpay_payment_id, "razorPay_signature", razorpay_signature, "courses", courses, "userid", userId)
 
     if(!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !courses || !userId){
         return res.status(400).json({
@@ -143,7 +143,7 @@ exports.verifyPayment = async(req, res) => {
                                     .update(body.toString())
                                     .digest("hex");
 
-    console.log("expectedsignature", expectedSignature);
+    // console.log("expectedsignature", expectedSignature);
     if(expectedSignature === razorpay_signature){
         //enroll the student
         console.log("jdfjsfjskfj")
@@ -198,7 +198,7 @@ const enrolledStudent = async(courses, userId, res) => {
                     userID: userId,
                     completedVideos: []
                 })
-                console.log("courseki progress", courseProgress);
+                // console.log("courseki progress", courseProgress);
 
                 //find the student and add the course to their list of enrolled student 
                 const enrolledStudent = await User.findByIdAndUpdate(userId, 
@@ -242,7 +242,7 @@ const enrolledStudent = async(courses, userId, res) => {
 
 exports.sendPaymentSuccessEmail = async(req, res) => {
     const {orderId, paymentId, amount} = req.body;
-    console.log("orderId", orderId, "paymentId", paymentId, "amount", amount)
+    // console.log("orderId", orderId, "paymentId", paymentId, "amount", amount)
 
     const userId = req.user.id;
     console.log("userId", userId);
