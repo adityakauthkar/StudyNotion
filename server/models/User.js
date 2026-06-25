@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        // unique: true,
+        unique: true,
         trim: true,
     },
     phoneNumber: {
@@ -58,4 +58,4 @@ const userSchema = new mongoose.Schema({
 },{timestamps: true});
 
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema); 
