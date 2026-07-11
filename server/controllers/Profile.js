@@ -201,17 +201,7 @@ exports.getEnrolledCourses = async (req, res) => {
       .exec();
     console.log("userdetails", userDetails);
 
-    // Explicitly log courseContent and its subSection
-    // userDetails.courses.forEach(course => {
-    //     console.log(`Course: ${course.courseName}`);
-    //     course.courseContent.forEach(content => {
-    //       console.log(`  Course Content ID: ${content._id}`);
-    //       content.subSection.forEach(sub => {
-    //         console.log(`    SubSection Title: ${sub.title}`);
-    //         console.log(`    SubSection Duration: ${sub.timeDuration}`);
-    //       });
-    //     });
-    //   });
+   
 
     if (!userDetails) {
       return res.status(400).json({

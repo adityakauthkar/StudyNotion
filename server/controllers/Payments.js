@@ -120,20 +120,15 @@ exports.verifyPayment = async (req, res) => {
   const razorpay_payment_id = req.body?.razorpay_payment_id;
   const razorpay_signature = req.body?.razorpay_signature;
 
-  // const courses = req.body?.courses;
-  // const courses = req.body['courses[]'] ? [req.body['courses[]']] : req.body.courses;
   const courses = req.body.courseId ? [req.body.courseId] : [];
   console.log("COURSES IN VERIFY:", courses);
-  // let courses = req.body?.courses;
-  // if (courses && !Array.isArray(courses)) {
-  //     courses = [courses];
-  // }
+ 
 
   console.log("req.body keys:", Object.keys(req.body));
   console.log("courses raw:", req.body.courses);
   const userId = req.user.id;
 
-  console.log("razorpay_order_id", razorpay_order_id, "razorpay_payment_id", razorpay_payment_id, "razorPay_signature", razorpay_signature, "courses", courses, "userid", userId)
+//   console.log("razorpay_order_id", razorpay_order_id, "razorpay_payment_id", razorpay_payment_id, "razorPay_signature", razorpay_signature, "courses", courses, "userid", userId)
 
   if (
     !razorpay_order_id ||

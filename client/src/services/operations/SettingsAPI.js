@@ -23,7 +23,7 @@ export function updateDisplayPicture(token, formData) {
         formData,
         {
           "Content-Type": "multipart/form-data",
-          authorisation: `Bearer ${token}`,
+          Authorization : `Bearer ${token}`,
         }
       )
       console.log(
@@ -88,7 +88,7 @@ export async function changePassword(token, formData) {
   try {
     console.log("formdata", formData)
     const response = await apiConnector("POST", CHANGE_PASSWORD_API, formData, {
-      authorisation: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     })
     console.log("CHANGE_PASSWORD_API API RESPONSE............", response)
 
